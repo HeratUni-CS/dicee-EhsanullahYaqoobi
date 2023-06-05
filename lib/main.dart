@@ -1,23 +1,62 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(
+  return runApp(
     MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.amberAccent,
         appBar: AppBar(
-          backgroundColor: Colors.red,
-          title: Text('Dice'),
+          title: const Text('MR_dicee'),
+          backgroundColor: Colors.amberAccent,
         ),
-        body: MyApp(),
+        body: DicePage(),
       ),
     ),
   );
 }
 
-class MyApp extends StatelessWidget {
+class DicePage extends StatefulWidget {
+  @override
+  State<DicePage> createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<DicePage> {
+  @override
+
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return Container();
+    var leftDiceNum = 1;
+    var rightDiceNum = 1;
+    void changeDiceview() {
+      setState(() {
+        leftDiceNum = Random().nextInt(6) + 1;
+        leftDiceNum = Random().nextInt(6) + 1;
+      });
+    }
+
+    return Center(
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: FlatButton(
+              onPressed: () {
+                changeDiceview();
+              },
+              child: Image.asset('images/dice$leftDiceNum.png'),
+            ),
+          ),
+          Expanded(
+            child: FlatButton(
+              onPressed: () {
+                changeDiceview();
+              },
+              child: Image.asset('images/$rightDiceNum.png'),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
